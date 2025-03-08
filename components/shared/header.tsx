@@ -7,7 +7,7 @@ export const Header: React.FC = () => {
     return (
         <div className="flex items-center justify-between gap-3 p-3 border-b-[1px]  px-7">
             <div className='flex items-center gap-3'>
-                <div className="font-geist text-lg font-bold mr-3">Learn Math</div>
+                <Link href='/home'><div className=" text-xl font-black mr-3">Learn Math</div></Link>
                 <div className="flex items-center justify-between gap-3">
                     <Link href="/login" className='text-sm '>Тесты</Link>
                     <Link href="/login" className='text-sm '>Формулы</Link>

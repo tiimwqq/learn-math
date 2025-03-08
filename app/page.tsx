@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-export default function Home() {
+const Introduction = () => {
   return (
     <div className="flex items-center justify-center min-h-[820px] ">
       <div className="text-center max-w-2xl">
@@ -10,12 +10,12 @@ export default function Home() {
           Удобная платформа с теорией, примерами и задачами. Всё, что нужно для изучения математики и подготовки к экзаменам в одном месте.
         </p>
 
-        <Link href='/Home'>
-          <Button className="mt-4">
-            Начать изучение
-          </Button>
+        <Link href='/home'>
+          <Button className="bg-primary text-primary-foreground my-5">Начать изучение</Button>
         </Link>
       </div>
     </div>
   );
 }
+
+export default Introduction;
