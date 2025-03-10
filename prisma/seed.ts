@@ -93,7 +93,6 @@ async function up() {
         }
     }
 
-    console.log("Данные успешно загружены");
 }
 
 async function down() {

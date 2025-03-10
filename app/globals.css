@@ -19,9 +19,8 @@ html {
 
 html, body {
   height: 100%;
+  overflow: auto;
 }
-
-
 
 @layer base {
   :root {
@@ -109,22 +108,31 @@ html, body {
   }
 
 
-.scrollbar::-webkit-scrollbar {
-  width: 4px;
+
+
+/* Для WebKit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 3px; /* Толщина вертикального скролла */
+  height: 3px; /* Толщина горизонтального скролла */
 }
 
-.scrollbar::-webkit-scrollbar-track {
-  border-radius: 6px;
-  background: #fff;
+::-webkit-scrollbar-track {
+  background: transparent; /* Фон скроллбара */
 }
 
-.scrollbar::-webkit-scrollbar-thumb {
-  background: #dbdadd;
-  border-radius: 6px;
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2); /* Цвет скролла */
+  border-radius: 4px; /* Закругление */
 }
 
-.scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #dbdadd;
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4); /* Цвет при наведении */
+}
+
+/* Для Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 @layer utilities {

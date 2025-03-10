@@ -41,8 +41,8 @@ export default function RootLayout({
           disableTransitionOnChange
           themes={["light", "dark"]}
         >
-          <Header />
-          <main>
+          <div className="sticky top-0 z-50  backdrop-blur-md supports-[backdrop-filter]:bg-background/60"><Header /></div>
+          <main className="flex-1">
             {children}
           </main>
           <Footer />
@@ -51,3 +51,4 @@ export default function RootLayout({
     </html>
   );
 }
+

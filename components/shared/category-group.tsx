@@ -15,11 +15,11 @@ export const CategoryGroup: React.FC<Props> = ({ className, categoryName, catego
         <div className={className}>
             <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1">
-                    <AccordionTrigger className='text-lg '>{categoryName}</AccordionTrigger>
+                    <AccordionTrigger className='text-lg font-semibold'>{categoryName}</AccordionTrigger>
                     {categoryTopics.map((topic) => (
                         <AccordionContent key={topic.id}>
                             <Link href={`/${categorySlug}/${topic.slug}/${topic.id}`}>
-                                <p className='text-zinc-600 text-base hover:underline'>{topic.name}</p>
+                                <p className='font-light text-base hover:underline'>{topic.name}</p>
                             </Link>
                         </AccordionContent>
                     ))}
