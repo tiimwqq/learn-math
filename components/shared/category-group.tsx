@@ -18,7 +18,7 @@ export const CategoryGroup: React.FC<Props> = ({ className, categoryName, catego
                     <AccordionTrigger className='text-lg font-semibold'>{categoryName}</AccordionTrigger>
                     {categoryTopics.map((topic) => (
                         <AccordionContent key={topic.id}>
-                            <Link href={`/${categorySlug}/${topic.slug}/${topic.id}`}>
+                            <Link href={`/${categorySlug}/${topic.slug}`}>
                                 <p className='font-light text-base hover:underline'>{topic.name}</p>
                             </Link>
                         </AccordionContent>

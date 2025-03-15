@@ -9,7 +9,7 @@ interface Props {
 
 export const SidebarToggle: React.FC<Props> = ({ className, onClick }) => {
     return (
-        <button className={cn(className, 'pr-4 border-r-[1px]')}
+        <button className={cn(className, 'pr-4 inline-flex m-4 border-r h-5')}
             onClick={onClick}>
             <PanelLeft size={18} className='text-[#71717a] dark:text-gray-300' />
         </button>

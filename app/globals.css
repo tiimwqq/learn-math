@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@plugin "@tailwindcss/typography";
+
 
 html {
   scroll-behavior: smooth;
@@ -17,7 +19,8 @@ html {
   }
 }
 
-html, body {
+html,
+body {
   height: 100%;
   overflow: auto;
 }
@@ -98,35 +101,41 @@ html, body {
 
 
 
-  html {
-    font-family: var(--font-nunito), sans-serif;
-  }
+html {
+  font-family: var(--font-nunito), sans-serif;
+}
 
-  /* Если в `html` указан английский язык, то GeistSans */
-  html:lang(en) {
-    font-family: var(--font-geist-sans), sans-serif;
-  }
+/* Если в `html` указан английский язык, то GeistSans */
+html:lang(en) {
+  font-family: var(--font-geist-sans), sans-serif;
+}
 
 
 
 
 /* Для WebKit (Chrome, Safari, Edge) */
 ::-webkit-scrollbar {
-  width: 3px; /* Толщина вертикального скролла */
-  height: 3px; /* Толщина горизонтального скролла */
+  width: 3px;
+  /* Толщина вертикального скролла */
+  height: 3px;
+  /* Толщина горизонтального скролла */
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent; /* Фон скроллбара */
+  background: transparent;
+  /* Фон скроллбара */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2); /* Цвет скролла */
-  border-radius: 4px; /* Закругление */
+  background: rgba(255, 255, 255, 0.2);
+  /* Цвет скролла */
+  border-radius: 4px;
+  /* Закругление */
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.4); /* Цвет при наведении */
+  background: rgba(255, 255, 255, 0.4);
+  /* Цвет при наведении */
 }
 
 /* Для Firefox */
@@ -141,10 +150,86 @@ html, body {
   }
 }
 
+.math-container {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f3f4f6;
+  border-radius: 0.5rem;
+}
+
+.math-editor {
+  width: 100%;
+  min-height: 100px;
+  font-family: monospace;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.25rem;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.math-node {
+  position: relative;
+  margin: 0.5em 0;
+  padding: 0.5em;
+  background: #f8f9fa;
+  border-radius: 4px;
+}
+
+.math-editor {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.math-error {
+  color: #dc3545;
+  font-family: monospace;
+}
+
+h1 {
+  font-weight: bold;
+  margin: 0.67em 0;
+  font-size: 1.875rem
+    /* 30px */
+  ;
+  line-height: 2.25rem
+    /* 36px */
+  ;
+  font-weight: 700;
+}
+
+h2 {
+  font-weight: bold;
+  margin: 0.83em 0;
+  font-size: 1.5rem
+    /* 24px */
+  ;
+  line-height: 2rem
+    /* 32px */
+  ;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.17em;
+  font-weight: bold;
+  margin: 1em 0;
+}
+
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -157,7 +242,7 @@ html, body {
   .font-geist {
     font-family: var(--font-geist-sans), sans-serif;
   }
-  
+
   /* Если текст только из латиницы, то GeistSans */
   .font-auto:lang(en) {
     font-family: var(--font-geist-sans), sans-serif;
@@ -170,6 +255,7 @@ html, body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

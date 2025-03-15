@@ -51,16 +51,17 @@ model Category {
 }
 
 model Topic {
-    id         Int    @id @default(autoincrement())
+    id         Int      @id @default(autoincrement())
     name       String
-    slug       String @unique // <-- добавляем slug
+    slug       String   @unique // <-- добавляем slug
     categoryId Int
     category   Category @relation(fields: [categoryId], references: [id])
+
+    content String
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
-
 
 enum UserRole {
     USER

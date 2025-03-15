@@ -6,6 +6,7 @@ import "./globals.css";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
 import { ThemeProvider } from "next-themes";
+import 'katex/dist/katex.min.css';
 
 // Подключаем шрифт Nunito
 const nunito = Exo_2({
@@ -24,6 +25,7 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   title: "Learn Math",
   description: "Documentation of math",
+  
 };
 
 export default function RootLayout({
