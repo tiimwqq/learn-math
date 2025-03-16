@@ -6,7 +6,7 @@ import React from 'react';
 export default async function Home() {
     const categories = await prisma.category.findMany({
         include: {
-            topics: true,
+            articles: true,
         },
     });
 
@@ -25,7 +25,7 @@ export default async function Home() {
                         key={category.id}
                         categoryName={category.name}
                         categorySlug={category.slug}
-                        categoryTopics={category.topics}
+                        categoryTopics={category.articles}
                     />
                 ))}
             </div>

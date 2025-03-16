@@ -14,6 +14,7 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 } //Получение всех статей в категории
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
+    console.log("API запрос получен");
     try {
         const { name, slug, content } = await req.json();
 

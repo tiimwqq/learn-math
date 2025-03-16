@@ -1,22 +1,32 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from "@/prisma/prisma-client";
 
-export async function GET({ params }: { params: { slug: string } }) {
+export async function GET(req: Request, { params }: { params: { category: string } }) {
     try {
+        console.log("Поиск категории по slug:", params.category);
+
+        // Проверяем, что slug передан
+        if (!params.category) {
+            return NextResponse.json({ error: "Slug категории не указан" }, { status: 400 });
+        }
+
+        // Ищем категорию по slug
         const category = await prisma.category.findUnique({
-            where: { slug: params.slug },
-            include: { articles: true }
+            where: { slug: params.category },
         });
 
         if (!category) {
-            return NextResponse.json({ error: "категория не найдена" }, { status: 404 });
+            console.log("Категория не найдена");
+            return NextResponse.json({ error: "Категория не найдена" }, { status: 404 });
         }
 
-        return NextResponse.json(category)
-    } catch {
-        return NextResponse.json({ error: "чтото пошло не так" }, { status: 500 });
+        console.log("Категория найдена:", category);
+        return NextResponse.json(category);
+    } catch (error) {
+        console.error("Ошибка при поиске категории:", error);
+        return NextResponse.json({ error: "Ошибка при получении категории" }, { status: 500 });
     }
-}  //поиск одной категории
+}
 
 export async function PUT(req: NextRequest, { params }: { params: { slug: string } }) {
     try {

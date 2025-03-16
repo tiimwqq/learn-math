@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Topic } from '@prisma/client';
+import { Article } from '@prisma/client';
 import Link from 'next/link';
 import React from 'react';
 
@@ -7,7 +7,7 @@ interface Props {
     className?: string;
     categoryName: string;
     categorySlug: string;
-    categoryTopics: Topic[]
+    categoryTopics: Article[]
 }
 
 export const CategoryGroup: React.FC<Props> = ({ className, categoryName, categoryTopics, categorySlug }) => {

@@ -8,10 +8,14 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { MathExtension } from "./math-extension";
 import MenuBar from "./menu-bar";
 import "katex/dist/katex.min.css";
+import { Section } from './shared/extensions/section'
+import { NoteBlock } from './shared/extensions/note-block'
+import { MathInline } from './shared/extensions/math-inline'
+import { MathBlock } from './shared/extensions/math-block'
 
 interface RichTextEditorProps {
-    content: string;
-    onChange: (content: string) => void;
+    content: any;
+    onChange: (json: any) => void;
 }
 
 export default function RichTextEditor({ content, onChange }: RichTextEditorProps) {
@@ -36,6 +40,10 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
                     class: 'math-container',
                 },
             }),
+            Section,
+            NoteBlock,
+            MathInline,
+            MathBlock,
         ],
         content: content,
         editorProps: {
@@ -44,7 +52,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             },
         },
         onUpdate: ({ editor }) => {
-            onChange(editor.getHTML());
+            onChange(editor.getJSON());
         },
     });
 

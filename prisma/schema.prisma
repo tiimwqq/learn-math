@@ -44,20 +44,20 @@ model Category {
     name String
     slug String @unique // <-- добавляем slug
 
-    topics Topic[]
+    articles Article[]
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
 
-model Topic {
+model Article {
     id         Int      @id @default(autoincrement())
     name       String
     slug       String   @unique // <-- добавляем slug
     categoryId Int
     category   Category @relation(fields: [categoryId], references: [id])
 
-    content String
+    content Json
 
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

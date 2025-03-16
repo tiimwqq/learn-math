@@ -13,6 +13,8 @@ import {
     List,
     ListOrdered,
     Strikethrough,
+    PlusCircle,
+    StickyNote
 } from "lucide-react";
 import { Toggle } from "./ui/toggle";
 import { Editor } from "@tiptap/react";
@@ -26,17 +28,16 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
         return null;
     }
 
-
     const insertFormula = () => {
         if (formula.trim() && editor) {
+            const nodeType = isDisplayMode ? 'mathBlock' : 'mathInline';
             editor
                 .chain()
                 .focus()
                 .insertContent({
-                    type: 'mathBlock',
+                    type: nodeType,
                     attrs: {
                         formula: formula,
-                        display: isDisplayMode,
                     },
                 })
                 .run();
@@ -44,37 +45,41 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
         }
     };
 
+    const insertSection = () => {
+        editor.chain().focus().insertContent({
+            type: "section",
+            content: [{ type: "paragraph", content: [{ type: "text", text: "Новый раздел..." }] }],
+        }).run();
+    };
+
+    const insertNoteBlock = () => {
+        editor.chain().focus().insertContent({
+            type: "noteBlock",
+            content: [{ type: "paragraph", content: [{ type: "text", text: "Заметка..." }] }],
+        }).run();
+    };
+
     const Options = [
-        {
-            icon: <Heading1 className="size-4" />,
-            onClick: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
-            pressed: editor.isActive('heading', { level: 1 }),
-        },
-        {
-            icon: <Heading2 className="size-4" />,
-            onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
-            pressed: editor.isActive('heading', { level: 2 }),
-        },
-        {
-            icon: <Heading3 className="size-4" />,
-            onClick: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
-            pressed: editor.isActive('heading', { level: 3 }),
-        },
-        { icon: <Bold className="size-4" />, onClick: () => editor.chain().focus().toggleBold().run(), pressed: editor.isActive("bold") },
-        { icon: <Italic className="size-4" />, onClick: () => editor.chain().focus().toggleItalic().run(), pressed: editor.isActive("italic") },
-        { icon: <Strikethrough className="size-4" />, onClick: () => editor.chain().focus().toggleStrike().run(), pressed: editor.isActive("strike") },
-        { icon: <AlignLeft className="size-4" />, onClick: () => editor.chain().focus().setTextAlign("left").run(), pressed: editor.isActive({ textAlign: "left" }) },
-        { icon: <AlignCenter className="size-4" />, onClick: () => editor.chain().focus().setTextAlign("center").run(), pressed: editor.isActive({ textAlign: "center" }) },
-        { icon: <AlignRight className="size-4" />, onClick: () => editor.chain().focus().setTextAlign("right").run(), pressed: editor.isActive({ textAlign: "right" }) },
-        { icon: <List className="size-4" />, onClick: () => editor.chain().focus().toggleBulletList().run(), pressed: editor.isActive("bulletList") },
-        { icon: <ListOrdered className="size-4" />, onClick: () => editor.chain().focus().toggleOrderedList().run(), pressed: editor.isActive("orderedList") },
-        { icon: <Highlighter className="size-4" />, onClick: () => editor.chain().focus().toggleHighlight().run(), pressed: editor.isActive("highlight") },
+        { id: "h1", icon: <Heading1 className="size-4" />, onClick: () => editor.chain().focus().toggleHeading({ level: 1 }).run(), pressed: editor.isActive('heading', { level: 1 }) },
+        { id: "h2", icon: <Heading2 className="size-4" />, onClick: () => editor.chain().focus().toggleHeading({ level: 2 }).run(), pressed: editor.isActive('heading', { level: 2 }) },
+        { id: "h3", icon: <Heading3 className="size-4" />, onClick: () => editor.chain().focus().toggleHeading({ level: 3 }).run(), pressed: editor.isActive('heading', { level: 3 }) },
+        { id: "bold", icon: <Bold className="size-4" />, onClick: () => editor.chain().focus().toggleBold().run(), pressed: editor.isActive("bold") },
+        { id: "italic", icon: <Italic className="size-4" />, onClick: () => editor.chain().focus().toggleItalic().run(), pressed: editor.isActive("italic") },
+        { id: "strike", icon: <Strikethrough className="size-4" />, onClick: () => editor.chain().focus().toggleStrike().run(), pressed: editor.isActive("strike") },
+        { id: "align-left", icon: <AlignLeft className="size-4" />, onClick: () => editor.chain().focus().setTextAlign("left").run(), pressed: editor.isActive({ textAlign: "left" }) },
+        { id: "align-center", icon: <AlignCenter className="size-4" />, onClick: () => editor.chain().focus().setTextAlign("center").run(), pressed: editor.isActive({ textAlign: "center" }) },
+        { id: "align-right", icon: <AlignRight className="size-4" />, onClick: () => editor.chain().focus().setTextAlign("right").run(), pressed: editor.isActive({ textAlign: "right" }) },
+        { id: "bullet-list", icon: <List className="size-4" />, onClick: () => editor.chain().focus().toggleBulletList().run(), pressed: editor.isActive("bulletList") },
+        { id: "ordered-list", icon: <ListOrdered className="size-4" />, onClick: () => editor.chain().focus().toggleOrderedList().run(), pressed: editor.isActive("orderedList") },
+        { id: "highlight", icon: <Highlighter className="size-4" />, onClick: () => editor.chain().focus().toggleHighlight().run(), pressed: editor.isActive("highlight") },
+        { id: "insert-section", icon: <PlusCircle className="size-4" />, onClick: insertSection, pressed: false },
+        { id: "insert-note", icon: <StickyNote className="size-4" />, onClick: insertNoteBlock, pressed: false },
     ];
 
     return (
         <div className="border rounded-md p-2 mb-2 bg-slate-50 space-x-2 z-50 flex items-center">
-            {Options.map((option, index) => (
-                <Toggle key={index} pressed={option.pressed} onPressedChange={option.onClick}>
+            {Options.map((option) => (
+                <Toggle key={option.id} pressed={option.pressed} onPressedChange={option.onClick}>
                     {option.icon}
                 </Toggle>
             ))}
