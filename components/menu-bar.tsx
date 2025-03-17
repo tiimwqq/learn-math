@@ -48,14 +48,14 @@ export default function MenuBar({ editor }: { editor: Editor | null }) {
     const insertSection = () => {
         editor.chain().focus().insertContent({
             type: "section",
-            content: [{ type: "paragraph", content: [{ type: "text", text: "Новый раздел..." }] }],
+            content: [{ type: "paragraph", content: [{ type: "text", text: "section" }] }],
         }).run();
     };
 
     const insertNoteBlock = () => {
         editor.chain().focus().insertContent({
             type: "noteBlock",
-            content: [{ type: "paragraph", content: [{ type: "text", text: "Заметка..." }] }],
+            content: [{ type: "paragraph", content: [{ type: "text", text: "див" }] }],
         }).run();
     };
 

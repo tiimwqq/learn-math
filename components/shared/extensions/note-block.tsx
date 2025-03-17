@@ -13,7 +13,7 @@ export const NoteBlock = Node.create({
     // Укажем data-атрибут, чтобы Tiptap мог снова распарсить
     return [
       'div', 
-      { ...HTMLAttributes, 'data-type': 'note-block', class: 'my-note-block' }, 
+      { ...HTMLAttributes, 'data-type': 'note-block', class: 'admin-note-block' }, 
       0
     ]
   },

@@ -11,7 +11,7 @@ export function parseProseMirrorNode(node: any): React.ReactNode {
 
 
     case 'paragraph':
-      return <p>{node.content?.map((child, index) => <React.Fragment key={index}>{parseProseMirrorNode(child)}</React.Fragment>)}</p>
+      return <p >{node.content?.map((child, index) => <React.Fragment key={index}>{parseProseMirrorNode(child)}</React.Fragment>)}</p>
 
 
     case 'text':
@@ -20,7 +20,7 @@ export function parseProseMirrorNode(node: any): React.ReactNode {
     case 'heading':
       // У heading могут быть attrs.level
       const HTag = `h${node.attrs.level}` as keyof JSX.IntrinsicElements
-      return <HTag>{node.content?.map((child, index) => <React.Fragment key={index}>{parseProseMirrorNode(child)}</React.Fragment>)}</HTag>
+      return <HTag className='heading'>{node.content?.map((child, index) => <React.Fragment key={index}>{parseProseMirrorNode(child)}</React.Fragment>)}</HTag>
 
 
     case 'section':
@@ -35,6 +35,39 @@ export function parseProseMirrorNode(node: any): React.ReactNode {
 
     case 'mathBlock':
       return renderMath(node.attrs.formula, true)
+
+    case 'bulletList':
+      return (
+        <ul>
+          {node.content?.map((child, index) => (
+            <React.Fragment key={index}>
+              {parseProseMirrorNode(child)}
+            </React.Fragment>
+          ))}
+        </ul>
+      );
+
+    case 'orderedList':
+      return (
+        <ol>
+          {node.content?.map((child, index) => (
+            <React.Fragment key={index}>
+              {parseProseMirrorNode(child)}
+            </React.Fragment>
+          ))}
+        </ol>
+      );
+
+    case 'listItem':
+      return (
+        <li>
+          {node.content?.map((child, index) => (
+            <React.Fragment key={index}>
+              {parseProseMirrorNode(child)}
+            </React.Fragment>
+          ))}
+        </li>
+      );
 
     default:
       // Поддержка mark'ов, strong, italic и т.д. тоже нужна.
@@ -66,7 +99,7 @@ export function parseProseMirrorMarks(node: any): React.ReactNode {
     return node.marks.reduce((acc, mark) => {
       switch (mark.type) {
         case 'bold':
-          return <strong>{acc}</strong>
+          return <strong className="article-bold">{acc}</strong>;
         case 'italic':
           return <em>{acc}</em>
         case 'strike':

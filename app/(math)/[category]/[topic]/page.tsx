@@ -18,11 +18,11 @@ export default async function ArticlePage(props: { params: Promise<{ category: s
     const reactTree = parseProseMirrorNode(article.content)
 
     return (
-      <div className="prose mx-auto">
+      <div className="prose mx-auto max-w-[800px] mt-[70px] mb-[70px] ">
         {reactTree}
       </div>
     );
   } catch (error) {
-    return <div className="text-red-600">Ошибка при загрузке статьи: {String(error)}</div>;
+    return <div className="text-red-600 ">Ошибка при загрузке статьи: {String(error)}</div>;
   }
 }

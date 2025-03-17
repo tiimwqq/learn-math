@@ -19,11 +19,11 @@ html {
   }
 }
 
-html,
+/* html,
 body {
   height: 100%;
   overflow: auto;
-}
+} */
 
 @layer base {
   :root {
@@ -150,6 +150,15 @@ html:lang(en) {
   }
 }
 
+.math-inline {
+  margin-left: 0.25rem
+    /* 4px */
+  ;
+  margin-right: 0.25rem
+    /* 4px */
+  ;
+}
+
 .math-container {
   margin: 1rem 0;
   padding: 1rem;
@@ -194,16 +203,43 @@ html:lang(en) {
   font-family: monospace;
 }
 
+.section {
+  margin-top: 50px;
+  border-top-width: 1px;
+  border-radius: 0.375rem;
+}
+
+.note-block {
+  border-width: 1px;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.article-bold {
+  display: inline-block;
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+
+}
+
+.note-block p .article-bold {
+  display: inline;
+  margin-right: 5px;
+}
+
+p {
+  font-weight: 300;
+}
+
 h1 {
   font-weight: bold;
   margin: 0.67em 0;
-  font-size: 1.875rem
-    /* 30px */
-  ;
-  line-height: 2.25rem
-    /* 36px */
-  ;
+  font-size: 1.875rem;
+  line-height: 2.25rem;
   font-weight: 700;
+  margin-bottom: 30px;
 }
 
 h2 {
@@ -229,14 +265,44 @@ h3 {
   margin-top: 50px;
 }
 
-mark {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  border-width: 1px;
-  border-radius: 0.375rem;
-  display: block;
-  padding: 20px;
+
+.admin-section {
+  margin-top: 50px;
+  border: 1px dashed blue;
+  padding: 8px;
+  margin: 8px 0;
+  position: relative;
 }
+
+.admin-section::before {
+  content: 'Section';
+  position: absolute;
+  top: -16px;
+  left: 8px;
+  background: #fff;
+  color: blue;
+  font-size: 12px;
+  padding: 0 4px;
+}
+
+.admin-note-block {
+  border: 1px solid green;
+  padding: 8px;
+  margin: 8px 0;
+  position: relative;
+}
+
+.admin-note-block::before {
+  content: 'Note';
+  position: absolute;
+  top: -16px;
+  left: 8px;
+  background: #fff;
+  color: green;
+  font-size: 12px;
+  padding: 0 4px;
+}
+
 
 @layer base {
   * {

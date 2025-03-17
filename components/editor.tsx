@@ -12,6 +12,7 @@ import { Section } from './shared/extensions/section'
 import { NoteBlock } from './shared/extensions/note-block'
 import { MathInline } from './shared/extensions/math-inline'
 import { MathBlock } from './shared/extensions/math-block'
+import { CustomBold } from "./shared/extensions/strong";
 
 interface RichTextEditorProps {
     content: any;
@@ -30,6 +31,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
                 },
                 bulletList: { HTMLAttributes: { class: "list-disc ml-3" } },
                 orderedList: { HTMLAttributes: { class: "list-decimal ml-3" } },
+                bold: false,
             }),
             TextAlign.configure({ types: ["heading", "paragraph"] }),
             Highlight,
@@ -44,6 +46,7 @@ export default function RichTextEditor({ content, onChange }: RichTextEditorProp
             NoteBlock,
             MathInline,
             MathBlock,
+            CustomBold
         ],
         content: content,
         editorProps: {

@@ -11,6 +11,6 @@ export const Section = Node.create({
   },
   renderHTML({ HTMLAttributes }) {
     // При рендере в HTML мы получим <section>...</section>
-    return ['section', HTMLAttributes, 0]  // 0 означает "зарендерить дочерние ноды сюда"
+    return ['section', { ...HTMLAttributes, class: 'admin-section' }, 0]  
   },
 })
