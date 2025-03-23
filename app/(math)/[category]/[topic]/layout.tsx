@@ -1,9 +1,28 @@
-
-// import { getLessonNavigationBySlug } from "@/lib/db";
-// import { SidebarController } from "@/components/shared/sidebar-controller";
-
+import '../../../../styles/prosemirror.css'
 
 export default async function TopicLayout(props: { children: React.ReactNode; params: { category: string; topic: string } }) {
+
+  return (
+    <div className="flex w-full">
+      {/* <SidebarController data={sidebarData} lesson={lesson}/> */}
+      <main className="flex-1 p-4 ">
+        {props.children}
+      </main>
+    </div>
+  );
+}
+
+
+
+
+
+
+
+
+
+
+
+
   // const resolvedParams = await Promise.resolve(props.params);
   // const { category, topic } = resolvedParams;
 
@@ -19,13 +38,3 @@ export default async function TopicLayout(props: { children: React.ReactNode; pa
   //   lesson,
   // };
 
-
-  return (
-    <div className="flex w-full">
-      {/* <SidebarController data={sidebarData} lesson={lesson}/> */}
-      <main className="flex-1 p-4">
-        {props.children}
-      </main>
-    </div>
-  );
-}

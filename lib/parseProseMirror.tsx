@@ -1,5 +1,7 @@
 import React, { JSX } from 'react'
 import katex from 'katex'
+import "katex/dist/katex.min.css";
+
 
 export function parseProseMirrorNode(node: any): React.ReactNode {
   if (!node) return null
@@ -29,12 +31,37 @@ export function parseProseMirrorNode(node: any): React.ReactNode {
     case 'noteBlock':
       return <div className="note-block">{node.content?.map((child, index) => <React.Fragment key={index}>{parseProseMirrorNode(child)}</React.Fragment>)}</div>
 
-    case 'mathInline':
-      // У нас есть node.attrs.formula
-      return renderMath(node.attrs.formula, false) // inline = false?
+    case "math": {
+      const formula = node.attrs.latex || ""
+      const html = katex.renderToString(formula, {
+        displayMode: false,
+        throwOnError: false
+      })
 
-    case 'mathBlock':
-      return renderMath(node.attrs.formula, true)
+      return (
+        <span
+          style={{
+            margin: "0 0.5rem",
+          }}
+          className="not-prose [&>.katex]:mx-2"
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      )
+    }
+
+    case 'horizontalRule':
+      return <hr className="my-5 border-t border-muted" />
+
+    case 'blockquote':
+      return (
+        <blockquote className="border-l-4 pl-4 italic my-4">
+          {node.content?.map((child, index) => (
+            <React.Fragment key={index}>
+              {parseProseMirrorNode(child)}
+            </React.Fragment>
+          ))}
+        </blockquote>
+      )
 
     case 'bulletList':
       return (
@@ -70,8 +97,6 @@ export function parseProseMirrorNode(node: any): React.ReactNode {
       );
 
     default:
-      // Поддержка mark'ов, strong, italic и т.д. тоже нужна.
-      // Но StarterKit добавляет их как "marks", см. пример ниже
       return node.content
         ? <>{node.content?.map((child, index) => <React.Fragment key={index}>{parseProseMirrorNode(child)}</React.Fragment>)}</>
         : null
@@ -79,11 +104,6 @@ export function parseProseMirrorNode(node: any): React.ReactNode {
 }
 
 function renderMath(formula: string, displayMode: boolean) {
-  // Либо просто оборачиваем в <span> / <div>
-  // Либо используем katex.renderToString и dangerouslySetInnerHTML
-  // Для SSR это сработает, но нужно убедиться, что KaTeX есть в окружении.
-  // Пример (упрощённый):
-
   const html = katex.renderToString(formula, { displayMode, throwOnError: false })
 
   if (displayMode) {
@@ -104,7 +124,17 @@ export function parseProseMirrorMarks(node: any): React.ReactNode {
           return <em>{acc}</em>
         case 'strike':
           return <s>{acc}</s>
-        // ... и т.д.
+        case 'textStyle':
+          // tiptap обычно хранит цвет в mark.attrs.color
+          if (mark.attrs?.color) {
+            return (
+              <span style={{ color: mark.attrs.color }}>
+                {acc}
+              </span>
+            )
+          }
+          return acc
+
         default:
           return acc
       }

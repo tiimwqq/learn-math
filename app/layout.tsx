@@ -2,7 +2,7 @@
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
 import { Geist } from "next/font/google";
-import "./globals.css";
+import "../styles/globals.css";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
 import { ThemeProvider } from "next-themes";

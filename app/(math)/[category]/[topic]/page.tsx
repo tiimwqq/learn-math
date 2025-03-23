@@ -1,4 +1,4 @@
-import { getArticle, getCategoryIdBySlug } from "@/lib/db";
+import { getArticle, getCategoryIdBySlug } from "@/lib/actions";
 import React from "react";
 import "katex/dist/katex.min.css";
 import { parseProseMirrorNode } from "@/lib/parseProseMirror";
@@ -18,11 +18,11 @@ export default async function ArticlePage(props: { params: Promise<{ category: s
     const reactTree = parseProseMirrorNode(article.content)
 
     return (
-      <div className="prose mx-auto max-w-[800px] mt-[70px] mb-[70px] ">
+      <div className="prose mx-auto max-w-[800px] mt-[70px] mb-[70px] prose-lg dark:prose-invert prose-headings:font-title">
         {reactTree}
       </div>
     );
-  } catch (error) {
-    return <div className="text-red-600 ">Ошибка при загрузке статьи: {String(error)}</div>;
+  } catch  {
+    return <div className="mx-auto max-w-[800px] text-center">К сожалению статья еще не написана :(</div>;
   }
 }

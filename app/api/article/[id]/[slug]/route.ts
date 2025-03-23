@@ -24,7 +24,7 @@ export async function PUT(req: Request, { params }: { params: { id: string, slug
     try {
         const { name, content } = await req.json();
 
-        const updatedArticle = await prisma.article.updateMany({
+        const updatedArticle = await prisma.article.update({
             where: {
                 categoryId: Number(params.id),
                 slug: params.slug,

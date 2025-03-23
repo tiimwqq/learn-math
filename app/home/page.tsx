@@ -9,8 +9,6 @@ export default async function Home() {
             articles: true,
         },
     });
-
-    console.log(categories)
     
     return (
         <Container className='flex flex-col p-4'>
