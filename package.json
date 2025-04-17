@@ -48,6 +48,7 @@
     "cheerio": "^1.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.7.4",
     "html-react-parser": "^5.2.2",
     "katex": "^0.16.21",
     "lucide-react": "^0.476.0",
@@ -79,6 +80,7 @@
     "tailwind-merge": "^3.0.2",
     "tailwindcss-animate": "^1.0.7",
     "tiptap-math-extension": "^0.0.1",
+    "typewriter-effect": "^2.21.0",
     "use-debounce": "^10.0.4"
   },
   "devDependencies": {

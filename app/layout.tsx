@@ -1,7 +1,7 @@
 
 import type { Metadata } from "next";
 import { Exo_2 } from "next/font/google";
-import { Geist } from "next/font/google";
+import { Jura } from "next/font/google";
 import "../styles/globals.css";
 import { Header } from "@/components/shared/header";
 import { Footer } from "@/components/shared/footer";
@@ -16,10 +16,10 @@ const nunito = Exo_2({
 });
 
 // Подключаем локальный GeistSans (можно заменить на Google Fonts)
-const geistSans = Geist({
+const geistSans = Jura({
   subsets: ['latin'],
   variable: '--font-geist-sans',
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: [ "300", "400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
           themes={["light", "dark"]}
         >
-          <div className="sticky top-0 z-50  backdrop-blur-md supports-[backdrop-filter]:bg-background/60"><Header /></div>
+          <div className="sticky top-0 z-50  backdrop-blur-md supports-[backdrop-filter]:bg-background/40"><Header /></div>
           <main className="flex-1">
             {children}
           </main>

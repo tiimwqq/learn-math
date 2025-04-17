@@ -34,13 +34,6 @@ export default function AdminPage() {
     window.localStorage.setItem("novel-slug", slug);
   }, [slug, title]);
 
-  // useEffect(() => {
-  //   const title = window.localStorage.getItem("novel-title");
-  //   const slug = window.localStorage.getItem("novel-slug");
-  //   if (title) setTitle(title);
-  //   if (slug) setSlug(slug);
-  // }, []);
-
   return (
     <div className="flex min-h-screen flex-col items-start gap-4 sm:px-5 max-w-[900px] mx-auto py-8">
       <div className="w-full flex gap-3">
